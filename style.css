@@ -1,38 +1,38 @@
 * {
   margin: 0px;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+  font-size: 1em;
 }
 
 h1 {
-  color: purple;
-  font-size: 80px;
-  text-align: center;
-  padding-top: 20px;
-  padding-bottom: 120px;
+ 
+  font-size: 4.5rem;
+  font-weight: 300;
 }
-
 .row {
   display: flex;
   flex-direction: column;
-  font-size: 30px;
-  flex-basis: 300px;
+  font-size: 1.7rem;
+  flex-basis: 200px;
   justify-content: flex-start;
   align-content: space-around;
   margin-right: 50px;
-  margin-left: 40px;
-  padding-left: 30px;
+  /* margin-left: 40px;
+  padding-left: 30px; */
 }
 
 .col {
   display: flex;
   flex-direction: row;
-  font-size: 14px;
+  font-size: .7rem;
 }
 
-#container {
+.container {    
   display: flex;
-  margin-left: 100px;
-  margin-right: 50px;
+  margin: 30px 70px 70px 90px;
   justify-content: space-around;
 }
 
@@ -44,13 +44,69 @@ h1 {
   padding-left: 20px;
   margin-left: -20px;
 }
-img {
-  width: 180px;
+img {    width: 140px;
+  /* height: 115px; */
   background-size: cover;
-  margin-top: 40px;
-  margin-left: -20px;
+  margin-top: 50px;
+  margin-left: -30px;
+  border-radius: 50px 30px 50px 30px;
 }
 
 .image {
   flex-grow: 0;
+}
+
+.left-col {
+  margin-left: 100px;
+}
+
+span.heading {
+  color: #139285;
+}
+
+.pl5 {
+  padding-left: 5px;
+}
+.link {
+  text-decoration: underline;
+}
+
+
+
+.banner {
+  background-color: #3c2467;
+  background-image:
+      /* Top jagged */
+      linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0) 100%),
+      linear-gradient(-135deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0) 100%),
+      /* Bottom jagged */
+      linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0) 100%),
+      linear-gradient(-45deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0) 100%),
+      /* Top and bottom fade  */
+      linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%),
+      linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+  background-position:
+      /* Top jagged */
+      top center, top center,
+      /* Bottom jagged */
+      bottom center, bottom center,
+      /* Top fade */
+      top center,
+      /* Bottom fade */
+      bottom center;
+  background-size:
+      /* Top + bottom jagged */
+      0.75rem 0.75rem, 0.75rem 0.75rem, 0.75rem 0.75rem, 0.75rem 0.75rem,
+      /* Top + bottom fade */
+      100% 1rem, 100% 1rem;
+  background-repeat: repeat-x;
+  color: #ccc;
+  font-family: Montserrat, Helvetica Neue, Helvetica, Arial, sans-serif;
+  letter-spacing: 1px;
+  /* margin: 0 -1rem 2rem; */
+  padding: 2rem 0;
+  position: relative;
+  text-align: center;
+  transition: all .25s ease-in-out;
+
 }
