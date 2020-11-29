@@ -1,12 +1,6 @@
-// const leftCol = document.querySelector('#left-col')
-// const rightCol = document.querySelector('#right-col')
-// const header = document.querySelector('#name-header')
-// const container = document.querySelector('#container')
-
-// make the above here in js and remove from index.html -- that way can add more cards
 const body = document.querySelector('body')
 
-function renderCard() {
+function renderCard(user, repo) {
   const newCard = document.createElement('section')
   newCard.classList.add('card')
   // newCard has two elements - header and container
@@ -16,16 +10,13 @@ function renderCard() {
   const leftCol = document.createElement('div')
   const rightCol = document.createElement('div')
   const headshot = document.createElement('div')
-
   // leftCol has four elements -- myName, gitHub, company, and website
   const myName = document.createElement('div')
   const gitHub = document.createElement('div')
   const company = document.createElement('div')
   const website = document.createElement('div')
-  
   // rightCol has one element -- bio
   const bio = document.createElement('div')
-  
 
   leftCol.innerHTML = "The Basics"
   rightCol.innerHTML = "The Story"
@@ -45,7 +36,8 @@ function renderCard() {
   newCard.classList.add('card')
   container.classList.add('container')
   header.classList.add('banner')
-  leftCol.classList.add('row')
+
+  leftCol.classList.add('row','left-col')
   leftCol.classList.add('left-col')
   rightCol.classList.add('row')
   myName.classList.add('col')
@@ -60,14 +52,38 @@ function renderCard() {
   headshot.classList.add('row')
   headshot.classList.add('image')
 
-  
-  myName.innerHTML = "<span class = 'heading'>Name</span><span class='pl5'>Tracy Falba</span>"
-  header.innerHTML = "Tracy Falba"
-  gitHub.innerHTML = "<span class = 'heading'>GitHub URL</span><span class='pl5 link'>tfalba</span>"
-  company.innerHTML = "<span class= 'heading'>Company Name</span><span class='pl5'>This is my company</span>"
-  website.innerHTML = "<span class= 'heading'>Website</span><span class='pl5 link'>http://thisisme.com</span>"
-  bio.innerHTML = "<span class='story-text'>The story of my life in 300 words or less. Some more words to keep filling up the row and see what happens to the wrapping. I love my boys!! I'm going to be a software developer! I am currently a student with Momentum Learn</span>"
-  headshot.innerHTML = '<img src="shutterstock_1326452492.jpg"></img>'
+  myName.innerHTML = `<span class = 'heading'>Name</span><span class='pl5'>${user.name}</span>`
+
+  header.innerHTML = user.name
+  gitHub.innerHTML = `<span class = 'heading'>GitHub Handle</span><span class='pl5 link'>${user.login}</span>`
+  company.innerHTML = `<span class= 'heading'>Company Name</span><span class='pl5'>${user.company}</span>`
+  website.innerHTML = `<span class= 'heading'>Website</span><span class='pl5 link'>${repo[0].name}</span>`
+  website.innerHTML = website.innerHTML + `"Another repo: <a href='${repo[0].html_url}'>Repo2</a>"`
+  bio.innerHTML = `<span class='story-text'>${user.bio}</span>`
+  headshot.innerHTML = `<img src=${user.avatar_url}></img>`
 }
-renderCard()
-renderCard()
+
+const urlApi = "https://api.github.com/users/"
+const repoUrl = "https://api.github.com/users/tfalba/repos"
+// const url = "https://api.github.com/users/tfalba"
+function getUser(login) {
+  fetch(urlApi+login)
+    .then(res => res.json())
+    .then(user => {
+      fetch(urlApi+login+'/repos')
+        .then(res => res.json())
+        .then(repo => {
+          renderCard(user,repo)
+        })
+
+      //      renderCard(user)
+      // if pull from main urlApi for a whole set can do a for let loop for (let user or users)
+    })
+}
+
+getUser('tfalba')
+getUser('cndreisbach')
+getUser('amygori')
+
+/* -------------------------- userArray is an array of objects that comes from the repo -- -------------------------- */
+/* ------- take each object and pass through renderCard using obj.key where key are the various datatypes used ------ */
