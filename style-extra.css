@@ -1,0 +1,41 @@
+
+.banner {
+  background-color: #3c2467;
+  background-image:
+      /* Top jagged */
+      linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0) 100%),
+      linear-gradient(-135deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0) 100%),
+      /* Bottom jagged */
+      linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0) 100%),
+      linear-gradient(-45deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0) 100%),
+      /* Top and bottom fade  */
+      linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%),
+      linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+  background-position:
+      /* Top jagged */
+      top center, top center,
+      /* Bottom jagged */
+      bottom center, bottom center,
+      /* Top fade */
+      top center,
+      /* Bottom fade */
+      bottom center;
+  background-size:
+      /* Top + bottom jagged */
+      0.75rem 0.75rem, 0.75rem 0.75rem, 0.75rem 0.75rem, 0.75rem 0.75rem,
+      /* Top + bottom fade */
+      100% 1rem, 100% 1rem;
+  background-repeat: repeat-x;
+  color: #ccc;
+  font-family: Montserrat, Helvetica Neue, Helvetica, Arial, sans-serif;
+  letter-spacing: 1px;
+  /* margin: 0 -1rem 2rem; */
+  padding: 1.5rem 0;
+  position: relative;
+  text-align: center;
+  transition: all .25s ease-in-out;
+  display: flex;
+  /* width: 80%; */
+  width: 100%;
+  justify-content: center;
+}

@@ -1,6 +1,8 @@
-const body = document.querySelector('body')
+/* --------------------------------- Sets up structure of the DOM and renders cards --------------------------------- */
 
-function renderCard(user, repo) {
+const cardHolder = document.querySelector('#card-holder')
+
+function renderCard (user, repo) {
   const newCard = document.createElement('section')
   newCard.classList.add('card')
   // newCard has two elements - header and container
@@ -15,6 +17,7 @@ function renderCard(user, repo) {
   const gitHub = document.createElement('div')
   const company = document.createElement('div')
   const website = document.createElement('div')
+  const sampleRepo = document.createElement('div')
   // rightCol has one element -- bio
   const bio = document.createElement('div')
 
@@ -30,8 +33,9 @@ function renderCard(user, repo) {
   leftCol.appendChild(gitHub)
   leftCol.appendChild(company)
   leftCol.appendChild(website)
+  leftCol.appendChild(sampleRepo)
   rightCol.appendChild(bio)
-  body.appendChild(newCard)
+  cardHolder.appendChild(newCard)
 
   newCard.classList.add('card')
   container.classList.add('container')
@@ -45,6 +49,8 @@ function renderCard(user, repo) {
   gitHub.classList.add('col')
   company.classList.add('col')
   website.classList.add('col')
+  sampleRepo.classList.add('col')
+  sampleRepo.classList.add('col-block')
 
   bio.classList.add('col')
   bio.classList.add('top')
@@ -52,38 +58,61 @@ function renderCard(user, repo) {
   headshot.classList.add('row')
   headshot.classList.add('image')
 
-  myName.innerHTML = `<span class = 'heading'>Name</span><span class='pl5'>${user.name}</span>`
-
-  header.innerHTML = user.name
-  gitHub.innerHTML = `<span class = 'heading'>GitHub Handle</span><span class='pl5 link'>${user.login}</span>`
-  company.innerHTML = `<span class= 'heading'>Company Name</span><span class='pl5'>${user.company}</span>`
-  website.innerHTML = `<span class= 'heading'>Website</span><span class='pl5 link'>${repo[0].name}</span>`
-  website.innerHTML = website.innerHTML + `"Another repo: <a href='${repo[0].html_url}'>Repo2</a>"`
-  bio.innerHTML = `<span class='story-text'>${user.bio}</span>`
+  if (user.name === null) {
+    myName.innerHTML = ''
+  } else {
+    myName.innerHTML = `<span class = 'heading'>Name</span><span class='pl5'>${user.name}</span>`
+    header.innerHTML = user.name
+  }
+  gitHub.innerHTML = `<span class = 'heading'>GitHub Handle</span><a class='pl5 link' href=${user.html_url}>${user.login}</a>`
+  if (user.company === null) {
+    company.innerHTML = ''
+  } else {
+    company.innerHTML = `<span class= 'heading'>Company Name</span><span class='pl5'>${user.company}</span>`
+  }
+  if (user.blog === null || user.blog === undefined || user.blog === '') {
+    website.innerHTML = ''
+  } else {
+    website.innerHTML = `<span class= 'heading'>Website</span><a class='pl5 link' href=${user.blog}>${user.blog}</a>`
+  }
+  for (let i = 2; i < 5; i++) {
+    sampleRepo.innerHTML += `<div><span class = 'heading'>Repo Sample ${+(i+1)}</span><a class='pl5 link' href='${repo[i].html_url}'>${repo[i].name}</a></div>`
+  }
+  if (user.bio === null) {
+    rightCol.innerHTML = ''
+  } else {
+    bio.innerHTML = `<span class='story-text'>${user.bio}</span>`
+  }
   headshot.innerHTML = `<img src=${user.avatar_url}></img>`
 }
 
+/* ------------------------------------------------- pull JSON data ------------------------------------------------- */
+
 const urlApi = "https://api.github.com/users/"
-const repoUrl = "https://api.github.com/users/tfalba/repos"
-// const url = "https://api.github.com/users/tfalba"
-function getUser(login) {
-  fetch(urlApi+login)
+function getUser (login) {
+  fetch (urlApi + login)
     .then(res => res.json())
     .then(user => {
-      fetch(urlApi+login+'/repos')
+      fetch (urlApi + login + '/repos')
         .then(res => res.json())
         .then(repo => {
-          renderCard(user,repo)
+          renderCard(user, repo)
         })
-
-      //      renderCard(user)
-      // if pull from main urlApi for a whole set can do a for let loop for (let user or users)
     })
 }
 
-getUser('tfalba')
-getUser('cndreisbach')
-getUser('amygori')
+/* -------------------------------------- Event listeners for submit and clear -------------------------------------- */
 
-/* -------------------------- userArray is an array of objects that comes from the repo -- -------------------------- */
-/* ------- take each object and pass through renderCard using obj.key where key are the various datatypes used ------ */
+const form = document.querySelector('#login-name')
+const login = document.querySelector('input')
+form.addEventListener('submit', function (event) {
+  event.preventDefault()
+  console.log(login.value)
+  getUser(login.value)
+})
+
+const clear = document.querySelector('#clear')
+clear.addEventListener('click', function (event) {
+  cardHolder.innerHTML = ''
+  login.value = ''
+})

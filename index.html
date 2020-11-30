@@ -8,12 +8,15 @@
   <script src="main.js" defer></script>
 </head>
 <body>
-  <!-- <section class="card">
-  <h1 id="name-header"></h1>
-  <div id="container">
-    <div id="left-col" class="row">The Basics</div>
-    <div id="right-col" class="row">The Story</div>
-  </div>
-</section> -->
+  <h1 class="form">GitHub User Lookup</h1>
+  <form id = "login-name" class="row form-row">
+    <label for="login" value="login">Enter User Login Name for hCard and Sample Repos</label>
+    <input id="login" type="text">
+    <div id="buttons">
+      <button id="submit">Submit</button>
+      <div id="clear">Clear</div>
+    </div>
+  </form>
+  <section id="card-holder"></section>
 </body>
 </html>
